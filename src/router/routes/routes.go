@@ -14,15 +14,13 @@ type Route struct {
 }
 
 func Config(router *mux.Router) *mux.Router {
-	routes := []Route{}
+	routes := loginRoutes
 
 	for _, route := range routes {
-		if route.Auth {
-			r.HandleFunc(route.URI, route.Function).Methods(route.Method)
-		} else {
-			r.HandleFunc(route.URI, route.Function).Methods(route.Method)
-		}
+		router.HandleFunc(route.URI, route.Function).Methods(route.Method)
 	}
 
-	return r
+	fileServer := http.FileServer(http.Dir("/css"))
+
+	return router
 }
