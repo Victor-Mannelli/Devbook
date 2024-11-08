@@ -582,17 +582,12 @@ h1, h2, h3, p, a {
   }
 }
 
-.my-3 {
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
+.mb-1 {
+  margin-bottom: 0.25rem;
 }
 
 .mb-2 {
   margin-bottom: 0.5rem;
-}
-
-.mb-1 {
-  margin-bottom: 0.25rem;
 }
 
 .mt-3 {
@@ -611,12 +606,12 @@ h1, h2, h3, p, a {
   min-height: 100vh;
 }
 
-.w-full {
-  width: 100%;
-}
-
 .w-\[80\%\] {
   width: 80%;
+}
+
+.w-full {
+  width: 100%;
 }
 
 .flex-col {
@@ -662,10 +657,6 @@ h1, h2, h3, p, a {
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
 
-.p-10 {
-  padding: 2.5rem;
-}
-
 .p-2 {
   padding: 0.5rem;
 }
@@ -674,27 +665,18 @@ h1, h2, h3, p, a {
   padding: 0.625rem;
 }
 
-.pb-5 {
-  padding-bottom: 1.25rem;
-}
-
 .pb-3 {
   padding-bottom: 0.75rem;
-}
-
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
 }
 
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 .font-medium {
@@ -712,14 +694,6 @@ h1, h2, h3, p, a {
 }
 
 @media (min-width: 640px) {
-  .sm\:w-1\/2 {
-    width: 50%;
-  }
-
-  .sm\:w-72 {
-    width: 18rem;
-  }
-
   .sm\:w-\[24rem\] {
     width: 24rem;
   }
