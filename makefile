@@ -1,5 +1,5 @@
 dev:
-	go run main.go
+	air main.go
 
-run css:
-	npx tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --watch
+tailwind:
+	tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --watch
