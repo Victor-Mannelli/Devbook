@@ -3,6 +3,7 @@ package controllers
 import (
 	"bytes"
 	"devbook/src/config"
+	"devbook/src/cookies"
 	"devbook/src/models"
 	"devbook/src/responses"
 	"encoding/json"
@@ -38,6 +39,11 @@ func Login(w http.ResponseWriter, r *http.Request) {
 
 	var authData models.AuthData
 	if err = json.NewDecoder(response.Body).Decode(&authData); err != nil {
+		responses.JSON(w, http.StatusUnprocessableEntity, responses.Error{Error: err.Error()})
+		return
+	}
+
+	if err = cookies.Save(w, authData.ID, authData.Token); err != nil {
 		responses.JSON(w, http.StatusUnprocessableEntity, responses.Error{Error: err.Error()})
 		return
 	}

@@ -4,7 +4,7 @@ function login(event) {
   event.preventDefault();
 
   $.ajax({
-    url: "/users",
+    url: "/login",
     method: "POST",
     data: {
       email: $('#email').val(),

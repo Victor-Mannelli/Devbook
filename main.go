@@ -2,6 +2,7 @@ package main
 
 import (
 	"devbook/src/config"
+	"devbook/src/cookies"
 	"devbook/src/router"
 	"devbook/src/utils"
 	"fmt"
@@ -11,6 +12,8 @@ import (
 
 func main() {
 	config.Load()
+	cookies.Config()
+
 	utils.LoadTemplates()
 	r := router.NewRouter()
 
