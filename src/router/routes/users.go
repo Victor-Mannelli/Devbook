@@ -12,4 +12,10 @@ var usersRoutes = []Route{
 		Function: controllers.SingUpPage,
 		Auth:     false,
 	},
+	{
+		URI:      "/users",
+		Method:   http.MethodPost,
+		Function: controllers.CreateUser,
+		Auth:     false,
+	},
 }
