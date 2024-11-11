@@ -11,10 +11,17 @@ var loginRoutes = []Route{
 		Method:   http.MethodGet,
 		Function: controllers.LoginPage,
 		Auth:     false,
-	}, {
+	},
+	{
 		URI:      "/login",
 		Method:   http.MethodGet,
 		Function: controllers.LoginPage,
+		Auth:     false,
+	},
+	{
+		URI:      "/login",
+		Method:   http.MethodPost,
+		Function: controllers.Login,
 		Auth:     false,
 	},
 }
