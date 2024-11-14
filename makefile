@@ -1,9 +1,3 @@
-dev:
-	# Run both tasks concurrently and keep them running
-	# `-j 2` allows two jobs to run at once, for `build` and `tailwind`
-
-	make -j 2 air tailwind
-
 air:
 	air main.go
 
