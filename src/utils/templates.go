@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"devbook/src/responses"
 	"net/http"
 	"text/template"
 )
@@ -12,5 +13,9 @@ func LoadTemplates() {
 }
 
 func ExecuteTemplate(w http.ResponseWriter, template string, data interface{}) {
-	templates.ExecuteTemplate(w, template, data)
+	err := templates.ExecuteTemplate(w, template, data)
+	if err != nil {
+		responses.JSON(w, http.StatusInternalServerError, responses.Error{Error: err.Error()})
+		return
+	}
 }
