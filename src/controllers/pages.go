@@ -39,6 +39,6 @@ func HomePage(w http.ResponseWriter, r *http.Request) {
 		responses.JSON(w, http.StatusUnprocessableEntity, responses.Error{Error: err.Error()})
 		return
 	}
-
+	fmt.Println(posts)
 	utils.ExecuteTemplate(w, "home.html", posts)
 }

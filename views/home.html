@@ -6,21 +6,64 @@
     <title>Devbook - Home</title>
     <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="/assets/css/output.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/input.css" />
   </head>
   <body>
-    <main class="flex flex-col gap-3 w-full min-h-screen bg-[#242729] p-5">
-      <h1>Home Page</h1>
-      <div>
+    <nav class="flex justify-between items-center w-full h-14 px-5 bg-gray-500">
+      <div class="flex items-center gap-3">
+        <a class="text-lg pr-5" href="#"> Devbook </a>
+        <a href="#"> Home </a>
+        <a href="#"> Link </a>
+      </div>
+      <div class="flex items-center gap-3">
+        <input id="search" type="search" placeholder="Search" class="block w-full h-10 p-2.5 text-sm" />
+        <button>Search</button>
+      </div>
+    </nav>
+    <main class="flex flex-col lg:flex-row gap-5 p-5 w-full min-h-[calc(100vh-3.5rem)]">
+      <div class="flex flex-col gap-3 lg:w-2/5">
+        <h1>New Post</h1>
+        <form id="new-post" class="flex flex-col gap-3">
+          <div class="form-group">
+            <label for="title"> Title </label>
+            <input type="text" class="form-control" name="title" required placeholder="Type your post title" />
+          </div>
+          <div class="form-group">
+            <label for="content"> Content </label>
+            <textarea type="text" class="form-control" name="content" required placeholder="Type your post content"> </textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">Create</button>
+        </form>
+      </div>
+      <div class="flex flex-col gap-3 lg:w-3/5">
         {{ range . }}
-        <h4>{{ .Title }}</h4>
-        <h4>{{ .Content }}</h4>
-        <hr />
+        <div class="flex flex-col gap-3 px-5 py-10 bg-gray-500 rounded-md">
+          <h1 class="font-bold">{{ .Title }}</h1>
+          <p>{{ .Content }}</p>
+          <a class="pb-1" href="#">{{ .AuthorUsername }} - {{ .CreatedAt}}</a>
+          <hr />
+          <p class="mt-5"> Buttons </p>
+        </div>
         {{ else }}
         <p>No posts available.</p>
         {{ end }}
       </div>
     </main>
+    <footer class="flex justify-center w-full bg-gray-500 px-3 py-5">
+      <p> ©Devbook 2024. Todos os direitos reservados. </p>
+    </footer>
   </body>
   <script src="/assets/js/jquery.min.js"></script>
-  <script src="/assets/js/login.js"></script>
 </html>
+
+<!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="#">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+  </li>
+</ul> -->

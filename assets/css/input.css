@@ -3,13 +3,44 @@
 @tailwind utilities;
 
 @layer base {
-  input {
+  main {
     @apply 
     bg-gray-50 text-gray-900 
     dark:bg-gray-700 dark:text-white;
   }
+  input, textarea {
+    @apply 
+    border outline-none rounded-md px-3 py-2
+    bg-gray-50 text-gray-900 border-gray-300 
+    dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:placeholder-gray-400;
+  }
+
+  button {
+    @apply h-10 pb-1 px-4 rounded-md brightness-125 hover:brightness-150
+    border border-gray-300 dark:border-gray-600
+    bg-gray-50 dark:bg-gray-700
+    text-gray-900 dark:text-white 
+  }
 
   h1, h2, h3, h4, p, a {
     @apply text-gray-900 dark:text-white;
-  } 
+  }
+
+  h1 {
+    @apply text-2xl;
+  }
+  h2 {
+    @apply text-xl;
+  }
+  h3 {
+    @apply text-lg;
+  }
+
+  p {
+    @apply text-sm;
+  }
+
+  .form-group {
+    @apply flex flex-col gap-1
+  }
 }
