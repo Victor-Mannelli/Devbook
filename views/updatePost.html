@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Devbook - Update Post - {{ .Title }}</title>
+    <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/output.css" />
+  </head>
+  <body>
+    {{ template "navbar" }}
+    <main class="flex flex-col gap-3 p-5 w-full min-h-[calc(100vh-3.5rem)]">
+      <h1>Update Post</h1>
+      <div class="form-group">
+        <label for="title"> Title </label>
+        <input id="title" name="title" type="text" class="" value=" {{ .Title }}" placeholder="Type your post title" />
+      </div>
+      <div class="form-group">
+        <label for="content"> Title </label>
+        <textarea id="content" type="text" class="form-control" name="content" required placeholder="Type your post content">{{ .Content }}</textarea>
+      </div>
+      <button id="update-post" data-post-id="{{ .PostId }}" class=""> Update Post </button>
+    </main>
+    {{ template "footer" }}
+  </body>
+  {{ template "scripts" }}
+  <script src="/assets/js/posts.js"></script>
+</html>

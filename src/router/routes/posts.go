@@ -24,4 +24,16 @@ var postsRoutes = []Route{
 		Function: controllers.DislikePost,
 		Auth:     true,
 	},
+	{
+		URI:      "/posts/{postId}/update",
+		Method:   http.MethodGet,
+		Function: controllers.UpdatePostPage,
+		Auth:     true,
+	},
+	{
+		URI:      "/posts/{postId}",
+		Method:   http.MethodPut,
+		Function: controllers.UpdatePost,
+		Auth:     true,
+	},
 }

@@ -11,6 +11,8 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+
+	"github.com/gorilla/mux"
 )
 
 func LoginPage(w http.ResponseWriter, r *http.Request) {
@@ -52,4 +54,34 @@ func HomePage(w http.ResponseWriter, r *http.Request) {
 		Posts:  posts,
 		UserId: userId,
 	})
+}
+
+func UpdatePostPage(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	postId, err := strconv.ParseUint(params["postId"], 10, 64)
+	if err != nil {
+		responses.JSON(w, http.StatusBadRequest, responses.Error{Error: err.Error()})
+		return
+	}
+
+	url := fmt.Sprintf("%s/posts/%d", config.API_URL, postId)
+	response, err := requests.ReqWithAuth(r, http.MethodGet, url, nil)
+	if err != nil {
+		responses.JSON(w, http.StatusInternalServerError, responses.Error{Error: err.Error()})
+		return
+	}
+	defer response.Body.Close()
+
+	if response.StatusCode >= 400 {
+		responses.ErrorHandler(w, response)
+		return
+	}
+
+	var post models.Post
+	if err = json.NewDecoder(response.Body).Decode(&post); err != nil {
+		responses.JSON(w, http.StatusUnprocessableEntity, responses.Error{Error: err.Error()})
+		return
+	}
+	fmt.Println(post)
+	utils.ExecuteTemplate(w, "updatePost.html", post)
 }

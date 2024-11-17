@@ -10,8 +10,8 @@
   <span> {{ .Likes }} likes </span>
 {{ end }}
 
-{{ define "edit" }}
-  <a href="/edit"> 
+{{ define "update" }}
+  <a href="posts/{{ .PostId }}/update"> 
     <i class="fa-solid fa-pen-to-square"></i>
   </a>
 {{ end }}
@@ -27,8 +27,8 @@
     {{ template "postHeader" . }}
     <p class="mt-5"> 
       {{ template "likes" . }} 
-      {{ template "edit" }} 
-      {{ template "delete" }} 
+      {{ template "update" . }} 
+      {{ template "delete" . }} 
     </p>
   </div>
 {{ end }}
