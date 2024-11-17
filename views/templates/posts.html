@@ -6,7 +6,7 @@
 {{ end }}
 
 {{ define "likes" }}
-  <i class="fa-solid fa-heart like-post"></i>
+  <i class="fa-solid fa-heart like-post cursor-pointer"></i>
   <span> {{ .Likes }} likes </span>
 {{ end }}
 
@@ -17,9 +17,7 @@
 {{ end }}
 
 {{ define "delete" }}
-  <a href="/delete"> 
-    <i class="fa-solid fa-trash" style="color: #ff0000"></i>
-  </a>
+  <i class="fa-solid fa-trash delete-post cursor-pointer" style="color: #ff0000"></i>
 {{ end }}
 
 {{ define "usersPost" }}
