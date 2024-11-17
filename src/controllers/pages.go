@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"devbook/src/config"
+	"devbook/src/cookies"
 	"devbook/src/models"
 	"devbook/src/requests"
 	"devbook/src/responses"
@@ -9,6 +10,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
 )
 
 func LoginPage(w http.ResponseWriter, r *http.Request) {
@@ -39,6 +41,15 @@ func HomePage(w http.ResponseWriter, r *http.Request) {
 		responses.JSON(w, http.StatusUnprocessableEntity, responses.Error{Error: err.Error()})
 		return
 	}
-	// fmt.Println(posts)
-	utils.ExecuteTemplate(w, "home.html", posts)
+
+	cookie, _ := cookies.Read(r)
+	userId, _ := strconv.ParseUint(cookie["id"], 10, 64)
+
+	utils.ExecuteTemplate(w, "home.html", struct {
+		Posts  []models.Post
+		UserId uint64
+	}{
+		Posts:  posts,
+		UserId: userId,
+	})
 }

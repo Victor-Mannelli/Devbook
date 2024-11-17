@@ -1,0 +1,40 @@
+{{ define "postHeader" }}
+  <h1 class="font-bold">{{ .Title }}</h1>
+  <p>{{ .Content }}</p>
+  <a class="pb-1" href="#">{{ .AuthorUsername }} - {{ .CreatedAt}}</a>
+  <hr />
+{{ end }}
+
+{{ define "likes" }}
+  <span> {{ .Likes }} likes </span>
+{{ end }}
+
+{{ define "edit" }}
+  <a href="/edit"> Edit Post </a>
+{{ end }}
+
+{{ define "delete" }}
+  <a href="/delete"> Delete Post </a>
+{{ end }}
+
+{{ define "usersPost" }}
+  <div postId="{{ .PostId }}" class="flex flex-col gap-3 px-5 py-10 bg-gray-500 rounded-md">
+    {{ template "postHeader" . }}
+    <p class="mt-5"> 
+      {{ template "likes" . }} 
+      {{ template "edit" }} 
+      {{ template "delete" }} 
+    </p>
+  </div>
+{{ end }}
+
+{{ define "normalPost" }}
+  <div postId="{{ .PostId }}" class="flex flex-col gap-3 px-5 py-10 bg-gray-500 rounded-md">
+    {{ template "postHeader" .}}
+    <p class="mt-5"> 
+      {{ template "likes" . }} 
+      {{ template "edit" }} 
+      {{ template "delete" }} 
+    </p>
+  </div>
+{{ end }}
