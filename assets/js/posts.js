@@ -1,4 +1,6 @@
 $("#new-post").on("submit", CreatePost);
+$(document).on("click", ".like-post", LikePost);
+$(document).on("click", ".dislike-post", DislikePost);
 
 function CreatePost(event) {
   event.preventDefault();
@@ -16,5 +18,63 @@ function CreatePost(event) {
   }).fail((err) => {
     console.log(err)
     alert("error on post creation");
+  })
+}
+
+function LikePost(event) {
+  event.preventDefault();
+
+  const clickedElement = $(event.target);
+  const postId = clickedElement.closest('div').data('post-id');
+
+  clickedElement.prop('disabled', true)
+
+  $.ajax({
+    url: `/posts/${postId}/like`,
+    method: "POST",
+  }).done(() => {
+    const likesElement = clickedElement.next('span');
+    const likes = parseInt(likesElement.text());
+
+    likesElement.text(likes + 1);
+
+    clickedElement.addClass('dislike-post')
+    clickedElement.css("color", "red");
+    clickedElement.removeClass('like-post')
+
+  }).fail((err) => {
+    console.log(err)
+    alert("error while liking post");
+  }).always(() => {
+    clickedElement.prop('disabled', false)
+  })
+}
+
+function DislikePost(event) {
+  event.preventDefault();
+
+  const clickedElement = $(event.target);
+  const postId = clickedElement.closest('div').data('post-id');
+
+  clickedElement.prop('disabled', true)
+
+  $.ajax({
+    url: `/posts/${postId}/dislike`,
+    method: "POST",
+  }).done(() => {
+    const likesElement = clickedElement.next('span');
+    const likes = parseInt(likesElement.text());
+
+    likesElement.text(likes - 1);
+
+    clickedElement.removeClass('dislike-post')
+    clickedElement.css("color", "");
+    clickedElement.addClass('like-post')
+
+  }).fail((err) => {
+    console.log(err)
+    alert("error while liking post");
+  }).always(() => {
+    clickedElement.prop('disabled', false)
   })
 }

@@ -1,24 +1,29 @@
 {{ define "postHeader" }}
   <h1 class="font-bold">{{ .Title }}</h1>
   <p>{{ .Content }}</p>
-  <a class="pb-1" href="#">{{ .AuthorUsername }} - {{ .CreatedAt}}</a>
+  <a class="pb-1" href="#">{{ .AuthorUsername }} - {{ .CreatedAt.Format "01/02/2006" }}</a>
   <hr />
 {{ end }}
 
 {{ define "likes" }}
+  <i class="fa-solid fa-heart like-post"></i>
   <span> {{ .Likes }} likes </span>
 {{ end }}
 
 {{ define "edit" }}
-  <a href="/edit"> Edit Post </a>
+  <a href="/edit"> 
+    <i class="fa-solid fa-pen-to-square"></i>
+  </a>
 {{ end }}
 
 {{ define "delete" }}
-  <a href="/delete"> Delete Post </a>
+  <a href="/delete"> 
+    <i class="fa-solid fa-trash" style="color: #ff0000"></i>
+  </a>
 {{ end }}
 
 {{ define "usersPost" }}
-  <div postId="{{ .PostId }}" class="flex flex-col gap-3 px-5 py-10 bg-gray-500 rounded-md">
+  <div data-post-id="{{ .PostId }}" class="flex flex-col gap-3 px-5 py-10 bg-gray-500 rounded-md">
     {{ template "postHeader" . }}
     <p class="mt-5"> 
       {{ template "likes" . }} 
@@ -29,12 +34,10 @@
 {{ end }}
 
 {{ define "normalPost" }}
-  <div postId="{{ .PostId }}" class="flex flex-col gap-3 px-5 py-10 bg-gray-500 rounded-md">
+  <div data-post-id="{{ .PostId }}" class="flex flex-col gap-3 px-5 py-10 bg-gray-500 rounded-md">
     {{ template "postHeader" .}}
     <p class="mt-5"> 
       {{ template "likes" . }} 
-      {{ template "edit" }} 
-      {{ template "delete" }} 
     </p>
   </div>
 {{ end }}
