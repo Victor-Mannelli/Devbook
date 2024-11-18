@@ -21,7 +21,7 @@ function CreatePost(event) {
       window.location = "/home";
     })
     .fail(() => {
-      Swal.fire("Error", "Error at post creation", "error");
+      Swal.fire("Error", "Error in post creation", "error");
     });
 }
 
@@ -104,7 +104,7 @@ function UpdatePost(event) {
       Swal.fire("Success", "Post updated successfully", "success").then(() => (window.location = "/home"));
     })
     .fail(() => {
-      Swal.fire("Error", "Error at post update", "error");
+      Swal.fire("Error", "Error in post update", "error");
     })
     .always(() => {
       $("#updatePost").prop("disabled", false);

@@ -118,3 +118,29 @@ func FilteredUsersPage(w http.ResponseWriter, r *http.Request) {
 
 	utils.ExecuteTemplate(w, "users.html", users)
 }
+
+func UserPage(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	userId, err := strconv.ParseUint(params["userId"], 10, 64)
+	if err != nil {
+		responses.JSON(w, http.StatusBadRequest, responses.Error{Error: err.Error()})
+		return
+	}
+
+	userData, err := models.FindUserRelatedData(userId, r)
+	if err != nil {
+		responses.JSON(w, http.StatusInternalServerError, responses.Error{Error: err.Error()})
+		return
+	}
+
+	cookie, _ := cookies.Read(r)
+	loggedUserId, _ := strconv.ParseUint(cookie["id"], 10, 64)
+
+	utils.ExecuteTemplate(w, "user.html", struct {
+		User         models.User
+		LoggedUserId uint64
+	}{
+		User:         userData,
+		LoggedUserId: loggedUserId,
+	})
+}

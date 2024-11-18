@@ -1,13 +1,13 @@
 {{ define "postHeader" }}
   <h1 class="font-bold">{{ .Title }}</h1>
   <p>{{ .Content }}</p>
-  <a class="pb-1" href="#">{{ .AuthorUsername }} - {{ .CreatedAt.Format "01/02/2006" }}</a>
+  <p><a class="pb-1" href="users/{{ .AuthorId }}">{{ .AuthorUsername }} </a> - {{ .CreatedAt.Format "01/02/2006" }} </p>
   <hr />
 {{ end }}
 
 {{ define "likes" }}
   <i class="fa-solid fa-heart like-post cursor-pointer"></i>
-  <span> {{ .Likes }} likes </span>
+  <span> {{ .Likes }} </span>
 {{ end }}
 
 {{ define "update" }}

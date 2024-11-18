@@ -37,6 +37,6 @@ function createUser(event) {
       });
     })
     .fail(() => {
-      Swal.fire("Error", "Error at user creation", "error");
+      Swal.fire("Error", "Error in user creation", "error");
     });
 }

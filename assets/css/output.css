@@ -618,7 +618,6 @@ button {
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
   padding-left: 1rem;
   padding-right: 1rem;
-  padding-bottom: 0.25rem;
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
   --tw-brightness: brightness(1.25);
@@ -901,6 +900,10 @@ p {
 }
 
 @media (min-width: 640px) {
+  .sm\:block {
+    display: block;
+  }
+
   .sm\:flex {
     display: flex;
   }

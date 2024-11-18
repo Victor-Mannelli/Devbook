@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Devbook - {{ .User.Username }}</title>
+    <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/output.css" />
+  </head>
+  <body>
+    {{ template "navbar" }}
+
+    {{ $FollowedByLoggedUser := false }}
+    {{ range .User.Followers }}
+      {{ if (eq .ID $.LoggedUserId)}}
+        {{ $FollowedByLoggedUser = true }}
+      {{ end }}
+    {{ end }}
+    
+    <main class="flex flex-col gap-5 p-5 w-full min-h-[calc(100vh-3.5rem)]">
+      <h2>{{ .User.Username }} Profile</h2>
+      <div class="flex flex-col gap-3 p-5 bg-gray-500 rounded-md">
+        <h4>{{ .User.Name }} - {{ .User.Username }} - Member since: {{ .User.CreatedAt.Format "01/02/2006" }}</h4>
+        <p>Followers: {{ len .User.Followers }}</p>
+        <p>Following: {{ len .User.Following }}</p>
+        
+        <a href="#">
+          {{ if ($FollowedByLoggedUser)}}
+          <button id="unfollow" data-user-id="{{ .User.ID }}">Unfollow</button>
+          {{ else }}
+            <button id="follow" data-user-id="{{ .User.ID }}">Follow</button>
+          {{ end }}
+        </a>
+      </div>
+      <h2> Posts </h2>
+      {{ range .User.Posts }}
+        {{ template "normalPost" . }}
+      {{ else }}
+        <p> No posts yet... </p>
+      {{ end }}
+    </main>
+    {{ template "footer" }}
+  </body>
+  {{ template "scripts" }}
+  <script src="/assets/js/posts.js"></script>
+  <script src="/assets/js/user.js"></script>
+</html>
