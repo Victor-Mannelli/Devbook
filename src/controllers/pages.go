@@ -11,6 +11,7 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/gorilla/mux"
 )
@@ -91,4 +92,29 @@ func UpdatePostPage(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Println(post)
 	utils.ExecuteTemplate(w, "updatePost.html", post)
+}
+
+func FilteredUsersPage(w http.ResponseWriter, r *http.Request) {
+	nameOrUsername := strings.ToLower(r.URL.Query().Get("user"))
+	url := fmt.Sprintf("%s/users?filter=%s", config.API_URL, nameOrUsername)
+
+	response, err := requests.ReqWithAuth(r, http.MethodGet, url, nil)
+	if err != nil {
+		responses.JSON(w, http.StatusInternalServerError, responses.Error{Error: err.Error()})
+		return
+	}
+	defer response.Body.Close()
+
+	if response.StatusCode >= 400 {
+		responses.ErrorHandler(w, response)
+		return
+	}
+
+	var users []models.User
+	if err = json.NewDecoder(response.Body).Decode(&users); err != nil {
+		responses.JSON(w, http.StatusUnprocessableEntity, responses.Error{Error: err.Error()})
+		return
+	}
+
+	utils.ExecuteTemplate(w, "users.html", users)
 }

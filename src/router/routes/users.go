@@ -18,4 +18,10 @@ var usersRoutes = []Route{
 		Function: controllers.CreateUser,
 		Auth:     false,
 	},
+	{
+		URI:      "/find-users",
+		Method:   http.MethodGet,
+		Function: controllers.FilteredUsersPage,
+		Auth:     false,
+	},
 }
