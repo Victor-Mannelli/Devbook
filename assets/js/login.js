@@ -14,7 +14,7 @@ function login(event) {
     .done(() => {
       window.location = "/home";
     })
-    .fail((err) => {
-      Swal.fire("Error", "Email and Password combination are invalid", "error");
+    .fail(() => {
+      Swal.fire("Error", "User authentication error", "error");
     });
 }
