@@ -3,8 +3,8 @@ $("#new-post").on("submit", CreatePost);
 $(document).on("click", ".like-post", LikePost);
 $(document).on("click", ".dislike-post", DislikePost);
 
-$("#update-post").on("click", UpdatePost)
-$(".delete-post").on("click", DeletePost)
+$("#update-post").on("click", UpdatePost);
+$(".delete-post").on("click", DeletePost);
 
 function CreatePost(event) {
   event.preventDefault();
@@ -13,74 +13,76 @@ function CreatePost(event) {
     url: "/posts",
     method: "POST",
     data: {
-      title: $('#title').val(),
-      content: $('#content').val(),
-    } 
-  }).done(() => {
-    console.log("test")
-    window.location = "/home";
-  }).fail((err) => {
-    console.log(err)
-    alert("error on post creation");
+      title: $("#title").val(),
+      content: $("#content").val(),
+    },
   })
+    .done(() => {
+      window.location = "/home";
+    })
+    .fail(() => {
+      Swal.fire("Error", "Error at post creation", "error");
+    });
 }
 
 function LikePost(event) {
   event.preventDefault();
 
   const clickedElement = $(event.target);
-  const postId = clickedElement.closest('div').data('post-id');
+  const postId = clickedElement.closest("div").data("post-id");
 
-  clickedElement.prop('disabled', true)
+  clickedElement.prop("disabled", true);
 
   $.ajax({
     url: `/posts/${postId}/like`,
     method: "POST",
-  }).done(() => {
-    const likesElement = clickedElement.next('span');
-    const likes = parseInt(likesElement.text());
-
-    likesElement.text(likes + 1);
-
-    clickedElement.addClass('dislike-post')
-    clickedElement.css("color", "red");
-    clickedElement.removeClass('like-post')
-
-  }).fail((err) => {
-    console.log(err)
-    alert("error while liking post");
-  }).always(() => {
-    clickedElement.prop('disabled', false)
   })
+    .done(() => {
+      const likesElement = clickedElement.next("span");
+      const likes = parseInt(likesElement.text());
+
+      likesElement.text(likes + 1);
+
+      clickedElement.addClass("dislike-post");
+      clickedElement.css("color", "red");
+      clickedElement.removeClass("like-post");
+    })
+    .fail(() => {
+      Swal.fire("Error", "Error while liking post", "error");
+    })
+    .always(() => {
+      clickedElement.prop("disabled", false);
+    });
 }
 
 function DislikePost(event) {
   event.preventDefault();
 
   const clickedElement = $(event.target);
-  const postId = clickedElement.closest('div').data('post-id');
+  const postId = clickedElement.closest("div").data("post-id");
 
-  clickedElement.prop('disabled', true)
+  clickedElement.prop("disabled", true);
 
   $.ajax({
     url: `/posts/${postId}/dislike`,
     method: "POST",
-  }).done(() => {
-    const likesElement = clickedElement.next('span');
-    const likes = parseInt(likesElement.text());
-
-    likesElement.text(likes - 1);
-
-    clickedElement.removeClass('dislike-post')
-    clickedElement.css("color", "");
-    clickedElement.addClass('like-post')
-
-  }).fail((err) => {
-    console.log(err)
-    alert("error while liking post");
-  }).always(() => {
-    clickedElement.prop('disabled', false)
   })
+    .done(() => {
+      const likesElement = clickedElement.next("span");
+      const likes = parseInt(likesElement.text());
+
+      likesElement.text(likes - 1);
+
+      clickedElement.removeClass("dislike-post");
+      clickedElement.css("color", "");
+      clickedElement.addClass("like-post");
+    })
+    .fail(() => {
+      Swal.fire("Error", "Error while disliking post", "error");
+    })
+    .always(() => {
+      clickedElement.prop("disabled", false);
+    });
 }
 
 function UpdatePost(event) {
@@ -88,41 +90,57 @@ function UpdatePost(event) {
 
   $(this).prop("disabled", true);
 
-  const postId = $(this).data('post-id');
+  const postId = $(this).data("post-id");
 
   $.ajax({
     url: `/posts/${postId}`,
     method: "PUT",
     data: {
-      title: $('#title').val(),
-      content: $('#content').val(),
-    } 
-  }).done(() => {
-    alert("success on post update");
-  }).fail((err) => {
-    alert("error on post update");
-  }).always(() => {
-    $("#updatePost").prop("disabled", false);
+      title: $("#title").val(),
+      content: $("#content").val(),
+    },
   })
-};
+    .done(() => {
+      Swal.fire("Success", "Post updated successfully", "success").then(() => (window.location = "/home"));
+    })
+    .fail(() => {
+      Swal.fire("Error", "Error at post update", "error");
+    })
+    .always(() => {
+      $("#updatePost").prop("disabled", false);
+    });
+}
 
 function DeletePost(event) {
   event.preventDefault();
 
-  const clickedElement = $(event.target);
-  const post = clickedElement.closest('div');
-  const postId = post.data('post-id');
+  Swal.fire({
+    title: "Warning!",
+    text: "Are you sure you want to delete this post?",
+    showCancelButton: true,
+    cancelButtonText: "Cancel",
+    icon: "warning",
+  }).then((confirmation) => {
+    if (!confirmation.value) return;
 
-  clickedElement.prop('disabled', true)
+    const clickedElement = $(event.target);
+    const post = clickedElement.closest("div");
+    const postId = post.data("post-id");
 
-  $.ajax({
-    url: `/posts/${postId}`,
-    method: "DELETE",
-  }).done(() => {
-    post.fadeOut("slow", () => $(this).remove())
-  }).fail((err) => {
-    alert("error on post deletion");
-  }).always(() => {
-    $("#updatePost").prop("disabled", false);
-  })
-};
+    clickedElement.prop("disabled", true);
+
+    $.ajax({
+      url: `/posts/${postId}`,
+      method: "DELETE",
+    })
+      .done(() => {
+        post.fadeOut("slow", () => $(this).remove());
+      })
+      .fail(() => {
+        Swal.fire("Error", "Error on post deletion", "error");
+      })
+      .always(() => {
+        $("#updatePost").prop("disabled", false);
+      });
+  });
+}

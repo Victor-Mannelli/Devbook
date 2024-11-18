@@ -7,13 +7,14 @@ function login(event) {
     url: "/login",
     method: "POST",
     data: {
-      email: $('#email').val(),
-      password: $('#password').val(),
-    } 
-  }).done(() => {
-    window.location = "/home"
-  }).fail((err) => {
-    console.log(err)
-    alert("user or password invalid")
+      email: $("#email").val(),
+      password: $("#password").val(),
+    },
   })
+    .done(() => {
+      window.location = "/home";
+    })
+    .fail((err) => {
+      Swal.fire("Error", "Email and Password combination are invalid", "error");
+    });
 }
