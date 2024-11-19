@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Devbook - Edit User</title>
+    <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/output.css" />
+  </head>
+  <body>
+    {{ template "navbar" }}
+    <main class="flex flex-col gap-3 p-5 w-full min-h-[calc(100vh-3.5rem)]">
+      <h1>Edit User</h1>
+      <form id="edit-user" class="flex flex-col gap-3">
+        <div class="form-group">
+          <label for="name"> Name </label>
+          <input id="name" name="name" type="text" value="{{ .Name }}" placeholder="Type your new name" required />
+        </div>
+        <div class="form-group">
+          <label for="email"> Email </label>
+          <input id="email" name="email" type="text" value="{{ .Email }}" placeholder="Type your new email" required />
+        </div>
+        <div class="form-group">
+          <label for="username"> Username </label>
+          <input id="username" name="username" type="text" value="{{ .Username }}" placeholder="Type your new username" required />
+        </div>
+        <button type="submit">Update User</button>
+      </form>
+    </main>
+    {{ template "footer" }}
+  </body>
+  {{ template "scripts" }}
+  <script src="/assets/js/user.js"></script>
+</html>

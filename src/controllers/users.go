@@ -3,6 +3,7 @@ package controllers
 import (
 	"bytes"
 	"devbook/src/config"
+	"devbook/src/cookies"
 	"devbook/src/requests"
 	"devbook/src/responses"
 	"encoding/json"
@@ -77,6 +78,64 @@ func Follow(w http.ResponseWriter, r *http.Request) {
 
 	url := fmt.Sprintf("%s/followers/%d", config.API_URL, userId)
 	response, err := requests.ReqWithAuth(r, http.MethodPost, url, nil)
+	if err != nil {
+		responses.JSON(w, http.StatusInternalServerError, responses.Error{Error: err.Error()})
+		return
+	}
+	defer response.Body.Close()
+
+	if response.StatusCode >= 400 {
+		responses.ErrorHandler(w, response)
+		return
+	}
+
+	responses.JSON(w, response.StatusCode, nil)
+}
+
+func EditUser(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
+	user, err := json.Marshal(map[string]string{
+		"name":     r.FormValue("name"),
+		"email":    r.FormValue("email"),
+		"username": r.FormValue("username"),
+	})
+	if err != nil {
+		responses.JSON(w, http.StatusBadRequest, responses.Error{Error: err.Error()})
+		return
+	}
+
+	cookie, _ := cookies.Read(r)
+	userId, _ := strconv.ParseUint(cookie["id"], 10, 64)
+
+	url := fmt.Sprintf("%s/users/%d", config.API_URL, userId)
+	response, err := requests.ReqWithAuth(r, http.MethodPut, url, bytes.NewBuffer(user))
+	if err != nil {
+		responses.JSON(w, http.StatusInternalServerError, responses.Error{Error: err.Error()})
+		return
+	}
+	defer response.Body.Close()
+
+	if response.StatusCode >= 400 {
+		responses.ErrorHandler(w, response)
+		return
+	}
+
+	responses.JSON(w, response.StatusCode, nil)
+}
+
+func UpdatePassword(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
+	passwords, err := json.Marshal(map[string]string{
+		"password":    r.FormValue("password"),
+		"newPassword": r.FormValue("newPassword"),
+	})
+	if err != nil {
+		responses.JSON(w, http.StatusBadRequest, responses.Error{Error: err.Error()})
+		return
+	}
+
+	url := fmt.Sprintf("%s/users/changePassword", config.API_URL)
+	response, err := requests.ReqWithAuth(r, http.MethodPost, url, bytes.NewBuffer(passwords))
 	if err != nil {
 		responses.JSON(w, http.StatusInternalServerError, responses.Error{Error: err.Error()})
 		return
