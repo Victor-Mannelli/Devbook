@@ -72,4 +72,10 @@ var usersRoutes = []Route{
 		Function: controllers.UpdatePassword,
 		Auth:     true,
 	},
+	{
+		URI:      "/delete-user",
+		Method:   http.MethodDelete,
+		Function: controllers.DeleteUser,
+		Auth:     true,
+	},
 }

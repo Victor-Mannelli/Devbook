@@ -2,6 +2,7 @@ $("#unfollow").on("click", Unfollow);
 $("#follow").on("click", Follow);
 $("#edit-user").on("submit", EditUser);
 $("#update-password").on("submit", UpdatePassword);
+$("#delete-user").on("click", DeleteUser);
 
 function Unfollow() {
   const userId = $(this).data("user-id");
@@ -58,9 +59,9 @@ function UpdatePassword(event) {
 
   if ($("#new-password").val() != $("#confirm-password").val()) {
     Swal.fire("Warning!", "Password don't match", "warning");
-    return
+    return;
   }
-  
+
   $.ajax({
     url: "/update-password",
     method: "PUT",
@@ -72,8 +73,30 @@ function UpdatePassword(event) {
     .done(() => {
       Swal.fire("Success", "Password updated successfully", "success").then(() => (window.location = "/profile"));
     })
-    .fail((e) => {
-      console.log(e)
+    .fail(() => {
       Swal.fire("Error", "Error in password update", "error");
     });
+}
+
+function DeleteUser() {
+  Swal.fire({
+    title: "Warning!",
+    text: "Are you sure you want to delete your account? This action in irreversible!",
+    showCancelButton: true,
+    cancelButtonText: "Cancel",
+    icon: "warning",
+  }).then((confirmation) => {
+    if (confirmation.value) {
+      $.ajax({
+        url: "/delete-user",
+        method: "DELETE",
+      })
+        .done(() => {
+          Swal.fire("Success", "User deleted successfully", "success").then(() => (window.location = "/logout"));
+        })
+        .fail(() => {
+          Swal.fire("Error", "Error in deleting your user", "error");
+        });
+    }
+  });
 }
