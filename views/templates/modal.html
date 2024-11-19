@@ -1,0 +1,27 @@
+{{ define "modal-followers" }}
+
+  <div id="modal-followers">
+    <div class="flex flex-col">
+      <h3> Followers </h3>
+      <hr/>
+    </div>
+    {{ range .Followers}}
+      <a href="/users/{{ .ID }}"> {{ .Username }}</a>
+    {{ end }}
+  </div>
+
+{{ end }}
+
+{{ define "modal-following" }}
+
+  <div id="modal-following">
+    <div class="flex flex-col">
+      <h3> Following </h3>
+      <hr/>
+    </div>
+    {{ range .Followers}}
+      <a href="/users/{{ .ID }}"> {{ .Username }}</a>
+    {{ end }}
+  </div>
+
+{{ end }}

@@ -90,7 +90,6 @@ func UpdatePostPage(w http.ResponseWriter, r *http.Request) {
 		responses.JSON(w, http.StatusUnprocessableEntity, responses.Error{Error: err.Error()})
 		return
 	}
-	fmt.Println(post)
 	utils.ExecuteTemplate(w, "updatePost.html", post)
 }
 

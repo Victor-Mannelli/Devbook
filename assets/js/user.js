@@ -4,6 +4,7 @@ $("#edit-user").on("submit", EditUser);
 $("#update-password").on("submit", UpdatePassword);
 $("#delete-user").on("click", DeleteUser);
 
+
 function Unfollow() {
   const userId = $(this).data("user-id");
   $(this).prop("disabled", true);
@@ -100,3 +101,4 @@ function DeleteUser() {
     }
   });
 }
+

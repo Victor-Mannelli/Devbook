@@ -21,12 +21,15 @@
       <h2>{{ .User.Username }} Profile</h2>
       <div class="flex flex-col gap-3 p-5 bg-gray-500 rounded-md">
         <h4>{{ .User.Name }} - {{ .User.Username }} - Member since: {{ .User.CreatedAt.Format "01/02/2006" }}</h4>
-        <p>Followers: {{ len .User.Followers }}</p>
-        <p>Following: {{ len .User.Following }}</p>
-        
+        <a id="followers" class="cursor-pointer" data-toggle="modal" data-target="#modal-followers">
+          <p>Followers: {{ len .User.Followers }}</p>
+        </a>
+        <a id="following" class="cursor-pointer" data-toggle="modal" data-target="#modal-following">
+          <p>Following: {{ len .User.Following }}</p>
+        </a>
         <a href="#">
           {{ if ($FollowedByLoggedUser)}}
-          <button id="unfollow" data-user-id="{{ .User.ID }}">Unfollow</button>
+            <button id="unfollow" data-user-id="{{ .User.ID }}">Unfollow</button>
           {{ else }}
             <button id="follow" data-user-id="{{ .User.ID }}">Follow</button>
           {{ end }}
@@ -39,6 +42,7 @@
         <p> No posts yet... </p>
       {{ end }}
     </main>
+    {{ template "modal-followers"}}
     {{ template "footer" }}
   </body>
   {{ template "scripts" }}

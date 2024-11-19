@@ -50,7 +50,6 @@ func FindUserRelatedData(userId uint64, r *http.Request) (User, error) {
 
 		case receivedFollowers := <-followersChannel:
 			if receivedFollowers == nil {
-				fmt.Println(receivedFollowers, "receivedFollowers")
 				return User{}, errors.New("error in finding followers")
 			}
 
@@ -65,7 +64,6 @@ func FindUserRelatedData(userId uint64, r *http.Request) (User, error) {
 
 		case receivedPosts := <-postChannel:
 			if receivedPosts == nil {
-				fmt.Println(receivedPosts, "receivedPosts")
 				return User{}, errors.New("error in finding posts")
 			}
 
