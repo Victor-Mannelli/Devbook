@@ -5,8 +5,8 @@
 @layer base {
   main {
     @apply 
-    bg-gray-50 text-gray-900 
-    dark:bg-gray-700 dark:text-white;
+    bg-light_bg text-gray-900 
+    dark:bg-dark_bg dark:text-white;
   }
   input, textarea {
     @apply 
@@ -16,10 +16,7 @@
   }
 
   button {
-    @apply min-h-11 px-4 rounded-md brightness-125 hover:brightness-150
-    border border-gray-300 dark:border-gray-600
-    bg-gray-50 dark:bg-gray-700
-    text-gray-900 dark:text-white 
+    @apply min-h-11 px-4 rounded-md dark:brightness-125 hover:brightness-110 dark:hover:brightness-150 text-gray-900 dark:text-white bg-light_secondary_bg dark:bg-dark_bg
   }
 
   h1, h2, h3, h4, p, a {

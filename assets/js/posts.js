@@ -30,7 +30,6 @@ function LikePost(event) {
 
   const clickedElement = $(event.target);
   const postId = clickedElement.closest("div").data("post-id");
-
   clickedElement.prop("disabled", true);
 
   $.ajax({
@@ -41,7 +40,7 @@ function LikePost(event) {
       const likesElement = clickedElement.next("span");
       const likes = parseInt(likesElement.text());
 
-      likesElement.text(likes + 1);
+      likesElement.text(likes + 1 + " likes");
 
       clickedElement.addClass("dislike-post");
       clickedElement.css("color", "red");
@@ -71,7 +70,7 @@ function DislikePost(event) {
       const likesElement = clickedElement.next("span");
       const likes = parseInt(likesElement.text());
 
-      likesElement.text(likes - 1);
+      likesElement.text(likes - 1 + " likes");
 
       clickedElement.removeClass("dislike-post");
       clickedElement.css("color", "");
@@ -123,9 +122,8 @@ function DeletePost(event) {
   }).then((confirmation) => {
     if (!confirmation.value) return;
 
-    const clickedElement = $(event.target);
-    const post = clickedElement.closest("div");
-    const postId = post.data("post-id");
+    const clickedElement = $(event.target).closest("div");
+    const postId = clickedElement.data("post-id");
 
     clickedElement.prop("disabled", true);
 
@@ -134,7 +132,7 @@ function DeletePost(event) {
       method: "DELETE",
     })
       .done(() => {
-        post.fadeOut("slow", () => $(this).remove());
+        $("#user-post").fadeOut("slow", () => $(this).remove());
       })
       .fail(() => {
         Swal.fire("Error", "Error on post deletion", "error");

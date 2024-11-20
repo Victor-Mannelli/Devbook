@@ -8,7 +8,7 @@
       </div>
       <div class="flex flex-col justify-center gap-1 overflow-auto">
         {{ range .Followers }}
-        <div class="bg-gray-400 rounded-md px-3 py-1">
+        <div class="dark:bg-dark_secondary_bg bg-light_secondary_bg rounded-md px-3 py-1">
           <a href="/users/{{ .ID }}" class="block hover:underline"> {{ .Username }}</a>
         </div>
         {{ else }}
@@ -30,7 +30,7 @@
       </div>
       <div class="flex flex-col justify-center gap-1 overflow-auto">
         {{ range .Following }}
-        <div class="bg-gray-400 rounded-md px-3 py-1">
+        <div class="dark:bg-dark_secondary_bg bg-light_secondary_bg rounded-md px-3 py-1">
           <a href="/users/{{ .ID }}" class="block hover:underline"> {{ .Username }}</a>
         </div>
         {{ else }}

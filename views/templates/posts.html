@@ -1,14 +1,14 @@
 {{ define "postHeader" }}
   <h1 class="font-bold">{{ .Title }}</h1>
   <p>{{ .Content }}</p>
-  <p><a class="pb-1" href="users/{{ .AuthorId }}">{{ .AuthorUsername }} </a> - {{ .CreatedAt.Format "01/02/2006" }} </p>
+  <p class="pt-3"><a class="pb-1" href="users/{{ .AuthorId }}">{{ .AuthorUsername }} </a> - {{ .CreatedAt.Format "01/02/2006" }} </p>
   <hr />
 {{ end }}
 
 {{ define "likes" }}
-  <div>
+  <div data-post-id="{{ .PostId }}">
     <i class="fa-solid fa-heart like-post cursor-pointer"></i>
-    <span> {{ .Likes }} </span>
+    <span> {{ .Likes }} likes </span>
   </div>
 {{ end }}
 
@@ -19,15 +19,15 @@
 {{ end }}
 
 {{ define "delete" }}
-  <i class="fa-solid fa-trash delete-post cursor-pointer" style="color: #ff0000"></i>
+  <i class="fa-solid fa-trash delete-post cursor-pointer sm:pt-2" style="color: #ff0000"></i>
 {{ end }}
 
 {{ define "usersPost" }}
-  <div data-post-id="{{ .PostId }}" class="flex flex-col gap-3 p-5 bg-gray-500 rounded-md">
+  <div id="user-post" class="flex flex-col gap-3 p-5 dark:bg-dark_secondary_bg bg-light_secondary_bg rounded-md">
     {{ template "postHeader" . }}
     <div class="flex justify-between">
       {{ template "likes" . }} 
-      <div class="flex gap-3 items-center">
+      <div data-post-id="{{ .PostId }}" class="flex items-center gap-3">
         {{ template "update" . }} 
         {{ template "delete" . }} 
       </div>
@@ -36,7 +36,7 @@
 {{ end }}
 
 {{ define "normalPost" }}
-  <div data-post-id="{{ .PostId }}" class="flex flex-col gap-3 p-5 bg-gray-500 rounded-md">
+  <div data-post-id="{{ .PostId }}" class="flex flex-col gap-3 p-5 dark:bg-dark_secondary_bg bg-light_secondary_bg rounded-md">
     {{ template "postHeader" .}}
     {{ template "likes" . }} 
   </div>

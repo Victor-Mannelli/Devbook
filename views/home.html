@@ -10,7 +10,7 @@
   <body>
     {{ template "navbar" }}
     <main class="flex flex-col lg:flex-row gap-3 p-5 pt-[4.75rem] w-full min-h-[calc(100vh-3.75rem)]">
-      <div class="flex flex-col gap-3 lg:w-2/5">
+      <div class="flex flex-col gap-3 lg:w-1/3">
         <h1>New Post</h1>
         <form id="new-post" class="flex flex-col gap-3">
           <div class="form-group">
@@ -19,12 +19,12 @@
           </div>
           <div class="form-group">
             <label for="content"> Content </label>
-            <textarea id="content" type="text" class="form-control" name="content" required placeholder="Type your post content"> </textarea>
+            <textarea id="content" type="text" class="form-control" name="content" required placeholder="Type your post content" maxlength="300"> </textarea>
           </div>
           <button type="submit">Create</button>
         </form>
       </div>
-      <div class="flex flex-col gap-3 lg:w-3/5">
+      <div class="flex flex-col gap-3 lg:w-2/3">
         <h1>Posts</h1>
         {{ range .Posts }}
           {{ if (eq .AuthorId $.UserId) }}

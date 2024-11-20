@@ -1,5 +1,5 @@
 {{ define "navbar" }}
-  <nav class="fixed flex justify-between items-center w-full h-14 bg-gray-500">
+  <nav class="fixed z-10 flex justify-between items-center w-full h-14 dark:bg-dark_secondary_bg bg-light_secondary_bg">
     <div class="flex items-center gap-10 pl-5">
       <h1 class="text-xl cursor-default">Devbook</h1>
       <div class="sm:flex hidden items-center gap-5">
@@ -19,13 +19,13 @@
         <p class="text-xl font-bold"> Exit </p> 
       </a> 
     </span>
-    <div id="toggle-mobile-menu" class="sm:hidden block text-white cursor-pointer pr-5">
+    <div id="toggle-mobile-menu" class="sm:hidden block text-black dark:text-white cursor-pointer pr-5">
       <i class="fa-solid fa-bars text-xl"></i>
     </div>
-    <div id="mobile-menu" class="fixed z-10 top-14 flex flex-col bg-gray-500 w-full h-fit px-5 border-y border-gray-600 roudned-b-lg mobileMenuTransition">
-      <a class="text-md hover:underline w-full p-2 my-2 bg-gray-600 rounded-md" href="/home"> Home </a>
-      <a class="text-md hover:underline w-full p-2 mb-2 bg-gray-600 rounded-md" href="/profile"> My Profile </a>
-      <a class="text-md hover:underline w-full p-2 mb-2 bg-gray-600 rounded-md" href="/logout"> Exit </a> 
+    <div id="mobile-menu" class="fixed top-14 flex flex-col dark:bg-dark_secondary_bg bg-light_secondary_bg w-full h-fit px-5 border-y border-gray-600 roudned-b-lg mobileMenuTransition">
+      <a class="text-md hover:underline w-full p-2 my-2 dark:bg-dark_bg bg-light_secondary_bg dark:brightness-100 brightness-110 rounded-md" href="/home"> Home </a>
+      <a class="text-md hover:underline w-full p-2 mb-2 dark:bg-dark_bg bg-light_secondary_bg dark:brightness-100 brightness-110 rounded-md" href="/profile"> My Profile </a>
+      <a class="text-md hover:underline w-full p-2 mb-2 dark:bg-dark_bg bg-light_secondary_bg dark:brightness-100 brightness-110 rounded-md" href="/logout"> Exit </a> 
     </div>
   </nav>
 {{ end }}
