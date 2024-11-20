@@ -6,8 +6,10 @@
 {{ end }}
 
 {{ define "likes" }}
-  <i class="fa-solid fa-heart like-post cursor-pointer"></i>
-  <span> {{ .Likes }} </span>
+  <div>
+    <i class="fa-solid fa-heart like-post cursor-pointer"></i>
+    <span> {{ .Likes }} </span>
+  </div>
 {{ end }}
 
 {{ define "update" }}
@@ -21,21 +23,21 @@
 {{ end }}
 
 {{ define "usersPost" }}
-  <div data-post-id="{{ .PostId }}" class="flex flex-col gap-3 px-5 py-10 bg-gray-500 rounded-md">
+  <div data-post-id="{{ .PostId }}" class="flex flex-col gap-3 p-5 bg-gray-500 rounded-md">
     {{ template "postHeader" . }}
-    <p class="mt-5"> 
+    <div class="flex justify-between">
       {{ template "likes" . }} 
-      {{ template "update" . }} 
-      {{ template "delete" . }} 
-    </p>
+      <div class="flex gap-3 items-center">
+        {{ template "update" . }} 
+        {{ template "delete" . }} 
+      </div>
+    </div>
   </div>
 {{ end }}
 
 {{ define "normalPost" }}
-  <div data-post-id="{{ .PostId }}" class="flex flex-col gap-3 px-5 py-10 bg-gray-500 rounded-md">
+  <div data-post-id="{{ .PostId }}" class="flex flex-col gap-3 p-5 bg-gray-500 rounded-md">
     {{ template "postHeader" .}}
-    <p class="mt-5"> 
-      {{ template "likes" . }} 
-    </p>
+    {{ template "likes" . }} 
   </div>
 {{ end }}

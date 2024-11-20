@@ -17,14 +17,14 @@
       {{ end }}
     {{ end }}
     
-    <main class="flex flex-col gap-5 p-5 w-full min-h-[calc(100vh-3.5rem)]">
+    <main class="flex flex-col gap-5 p-5 pt-[4.75rem] w-full min-h-[calc(100vh-3.75rem)]">
       <h2>{{ .User.Username }} Profile</h2>
       <div class="flex flex-col gap-3 p-5 bg-gray-500 rounded-md">
         <h4>{{ .User.Name }} - {{ .User.Username }} - Member since: {{ .User.CreatedAt.Format "01/02/2006" }}</h4>
-        <a id="followers" class="cursor-pointer" data-toggle="modal" data-target="#modal-followers">
+        <a id="open-modal-followers" class="cursor-pointer">
           <p>Followers: {{ len .User.Followers }}</p>
         </a>
-        <a id="following" class="cursor-pointer" data-toggle="modal" data-target="#modal-following">
+        <a id="open-modal-following" class="cursor-pointer">
           <p>Following: {{ len .User.Following }}</p>
         </a>
         <a href="#">
@@ -42,7 +42,8 @@
         <p> No posts yet... </p>
       {{ end }}
     </main>
-    {{ template "modal-followers"}}
+    {{ template "modalFollowers" .User }}
+    {{ template "modalFollowing" .User }}
     {{ template "footer" }}
   </body>
   {{ template "scripts" }}

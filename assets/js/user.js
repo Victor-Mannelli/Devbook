@@ -4,7 +4,6 @@ $("#edit-user").on("submit", EditUser);
 $("#update-password").on("submit", UpdatePassword);
 $("#delete-user").on("click", DeleteUser);
 
-
 function Unfollow() {
   const userId = $(this).data("user-id");
   $(this).prop("disabled", true);
@@ -102,3 +101,20 @@ function DeleteUser() {
   });
 }
 
+$(document).ready(() => {
+  $("#open-modal-followers").on("click", () => {
+    $("#modal-followers").removeClass("hidden").addClass("flex");
+  });
+
+  $("#close-modal-followers").on("click", () => {
+    $("#modal-followers").removeClass("flex").addClass("hidden");
+  });
+
+  $("#open-modal-following").on("click", () => {
+    $("#modal-following").removeClass("hidden").addClass("flex");
+  });
+
+  $("#close-modal-following").on("click", () => {
+    $("#modal-following").removeClass("flex").addClass("hidden");
+  });
+});

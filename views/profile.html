@@ -10,14 +10,14 @@
   <body>
     {{ template "navbar" }}
     
-    <main class="flex flex-col gap-5 p-5 w-full min-h-[calc(100vh-3.5rem)]">
+    <main class="flex flex-col gap-5 p-5 pt-[4.75rem] w-full min-h-[calc(100vh-3.75rem)]">
       <h2>My Profile</h2>
       <div class="flex flex-col gap-3 p-5 bg-gray-500 rounded-md">
         <h4>{{ .Name }} - {{ .Username }} - Member since: {{ .CreatedAt.Format "01/02/2006" }}</h4>
-        <a id="followers" class="cursor-pointer" data-toggle="modal" data-target="#modal-followers">
+        <a id="open-modal-followers" class="cursor-pointer" data-toggle="modal" data-target="#modal-followers">
           <p>Followers: {{ len .Followers }}</p>
         </a>
-        <a id="following" class="cursor-pointer" data-toggle="modal" data-target="#modal-following">
+        <a id="open-modal-following" class="cursor-pointer" data-toggle="modal" data-target="#modal-following">
           <p>Following: {{ len .Following }}</p>
         </a>
         
@@ -40,6 +40,8 @@
         <button> Delete account permanently </button>
       </a>
     </main>
+    {{ template "modalFollowers" . }}
+    {{ template "modalFollowing" . }}
     {{ template "footer" }}
   </body>
   {{ template "scripts" }}
